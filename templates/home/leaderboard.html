@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Reytinglar - TypingUz{% endblock %}
+
+{% block content %}
+<h1>Eng yaxshi natijalar</h1>
+
+<table class="leaderboard-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Matn</th>
+            <th>WPM</th>
+            <th>Aniqlik</th>
+            <th>Vaqt</th>
+            <th>Sana</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in results %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ r.text.title }}</td>
+            <td><strong>{{ r.wpm|floatformat:1 }}</strong></td>
+            <td>{{ r.accuracy|floatformat:1 }}%</td>
+            <td>{{ r.time_taken|floatformat:1 }}s</td>
+            <td>{{ r.created_at|date:"d.m.Y" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="empty-msg">Hali natijalar yo'q</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

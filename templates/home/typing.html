@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ text.title }} - TypingUz{% endblock %}
+
+{% block content %}
+<div class="typing-container">
+    <div class="typing-header">
+        <h2>{{ text.title }}</h2>
+        <span class="badge badge-{{ text.difficulty }}">{{ text.get_difficulty_display }}</span>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-label">Vaqt</span>
+            <span class="stat-value" id="timer">0s</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">WPM</span>
+            <span class="stat-value" id="wpm">0</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Aniqlik</span>
+            <span class="stat-value" id="accuracy">100%</span>
+        </div>
+    </div>
+
+    <div class="text-display" id="textDisplay"></div>
+
+    <textarea id="typingInput" class="typing-input" placeholder="Bu yerga yozishni boshlang..." autofocus></textarea>
+
+    <div class="result-panel" id="resultPanel" style="display:none;">
+        <h2>Natija</h2>
+        <div class="result-stats">
+            <div class="result-stat">
+                <span class="result-value" id="finalWpm">0</span>
+                <span class="result-label">WPM</span>
+            </div>
+            <div class="result-stat">
+                <span class="result-value" id="finalAccuracy">0%</span>
+                <span class="result-label">Aniqlik</span>
+            </div>
+            <div class="result-stat">
+                <span class="result-value" id="finalTime">0s</span>
+                <span class="result-label">Vaqt</span>
+            </div>
+        </div>
+        <div class="result-actions">
+            <button onclick="resetTest()" class="btn">Qayta urinish</button>
+            <a href="{% url 'home:index' %}" class="btn btn-secondary">Boshqa matn</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const originalText = "{{ text.content|escapejs }}";
+const textId = {{ text.pk }};
+const csrfToken = '{{ csrf_token }}';
+</script>
+<script src="{% static 'js/typing.js' %}"></script>
+{% endblock %}

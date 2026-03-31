@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TypingUz{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home:index' %}" class="logo">⌨ TypingUz</a>
+            <div class="nav-links">
+                <a href="{% url 'home:index' %}">Bosh sahifa</a>
+                <a href="{% url 'home:leaderboard' %}">Reytinglar</a>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

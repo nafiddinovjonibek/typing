@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}TypingUz - Matn tanlang{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Tezkor yozishni mashq qiling!</h1>
+    <p>Matnni tanlang va yozish tezligingizni sinab ko'ring</p>
+</div>
+
+<div class="text-grid">
+    {% for text in texts %}
+    <a href="{% url 'home:typing' text.pk %}" class="text-card">
+        <div class="card-header">
+            <h3>{{ text.title }}</h3>
+            <span class="badge badge-{{ text.difficulty }}">{{ text.get_difficulty_display }}</span>
+        </div>
+        <p class="card-info">{{ text.word_count }} so'z</p>
+    </a>
+    {% empty %}
+    <p class="empty-msg">Hozircha matnlar yo'q. Admin paneldan qo'shing.</p>
+    {% endfor %}
+</div>
+{% endblock %}
